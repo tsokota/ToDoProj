@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ToDoPr.Models.Task>
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<div>
+    <br>
+    <div id="results">
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>ID 342421423 задачи</th>
+                    <th>Имя задачи</th>
+                    <th>Имя исполнителя</th>
+                    <th>Состояние</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (ToDoPr.Models.Task b in Model)
+                {
+                    <tr>
+                        <th scope="row" name="Id">@b.Id</th>
+                        <td>@b.TaskName</td>
+                        <td>@b.PerformerName</td>
+                        <td>
+                            @if (@b.isDone)
+                            {
+                                @:Выполнена
+                        } @if (!@b.isDone)
+                        {
+                            @:Не выполнена
+                        }
+                    </td>
+                    <td><p><a href="/Home/Delete/@b.Id">Редактировать</a>   @Ajax.ActionLink("Удалить", "Delete1", new { Id = @b.Id }, new AjaxOptions { UpdateTargetId = "results1" }) </p></td>
+
+                </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+    <div id="results1"></div>
+        <input type="button" value="Добавить задачу" class="btn btn-default" />
+    
+   
+
+
+</div>

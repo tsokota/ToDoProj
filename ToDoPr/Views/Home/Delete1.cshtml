@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<ToDoPr.Models.Task>
+<div id="searchresults">
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>ID 342421423 задачи</th>
+                <th>Имя задачи</th>
+                <th>Имя исполнителя</th>
+                <th>Состояние</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (ToDoPr.Models.Task b in Model)
+            {
+                <tr>
+                    <th scope="row" name="Id">@b.Id</th>
+                    <td>@b.TaskName</td>
+                    <td>@b.PerformerName</td>
+                    <td>
+                        @if (@b.isDone)
+                        {
+                            @:Выполнена
+                        } @if (!@b.isDone)
+                        {
+                            @:Не выполнена
+                        }
+                    </td>
+                    <td><p><a href="/Home/Delete/@b.Id">Редактировать</a>   @Ajax.ActionLink("Удалить", "Delete", new { Id = @b.Id }, new AjaxOptions { UpdateTargetId = "results" }) </p></td>
+
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>
